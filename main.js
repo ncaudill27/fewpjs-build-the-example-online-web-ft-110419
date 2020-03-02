@@ -1,10 +1,34 @@
 // Defining text characters for the empty and full hearts for you to use later.
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
+const articles = collectArticles()
 
+function collectArticles() {
+  const articlesRaw = document.querySelectorAll('article')
+  let articles = []
+  articlesRaw.forEach( article => {
+    articles.push(article)
+  })
+  return articles
+}
 // Your JavaScript code goes here!
+function toggleHeart(target) {
+  if (target.innerText == EMPTY_HEART) {
+    target.innerText = FULL_HEART
+    target.style.color = 'red'
+  } else {
+    target.innerText = EMPTY_HEART
+    target.removeAttribute('style')
+  }
+}
 
-
+document.addEventListener('DOMContentLoaded', ()=>{
+  articles.map( article => {
+    let like = article.querySelector('li')
+    let heart = like.querySelector('span')
+    like.addEventListener('click', toggleHeart(like.querySelector('span')))
+  })
+})
 
 
 //------------------------------------------------------------------------------
