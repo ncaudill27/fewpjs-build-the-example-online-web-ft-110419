@@ -3,6 +3,7 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 const articles = collectArticles()
 const hearts = collectHearts()
+const errorModal = document.querySelector('div#modal')
 
 function collectHearts() {
     const heartsRaw = document.querySelectorAll('li > span')
@@ -31,12 +32,32 @@ function toggleHeart(target) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', ()=>{
+function toggleHeartEventListener() {
   articles.map( (article, index) => {
     article.addEventListener('click', event => {
-      toggleHeart(hearts[index])  
+      if (event.target.matches('li')) {
+        mimicServerCall()
+        .then( response => console.log(response))
+        .then(toggleHeart(hearts[index]))
+        .catch( error => flashError(error))
+      }
     })
   })
+}
+
+function flashError(message) {
+  const errorMessage = document.getElementById('modal-message')
+  errorModal.removeAttribute('class')
+  errorMessage.innerText = message
+  setTimeout(removeError, 5000)
+}
+
+function removeError() {
+  errorModal.setAttribute('class', 'hidden')
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  toggleHeartEventListener()
 })
 
 
