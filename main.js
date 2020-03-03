@@ -2,7 +2,16 @@
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 const articles = collectArticles()
+const hearts = collectHearts()
 
+function collectHearts() {
+    const heartsRaw = document.querySelectorAll('li > span')
+    let hearts = []
+    heartsRaw.forEach( heart => {
+      hearts.push(heart)
+    })
+    return hearts
+}
 function collectArticles() {
   const articlesRaw = document.querySelectorAll('article')
   let articles = []
@@ -25,7 +34,7 @@ function toggleHeart(target) {
 document.addEventListener('DOMContentLoaded', ()=>{
   articles.map( (article, index) => {
     article.addEventListener('click', event => {
-      console.log(index)  
+      toggleHeart(hearts[index])  
     })
   })
 })
