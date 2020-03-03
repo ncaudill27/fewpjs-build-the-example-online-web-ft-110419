@@ -15,18 +15,18 @@ function collectArticles() {
 function toggleHeart(target) {
   if (target.innerText == EMPTY_HEART) {
     target.innerText = FULL_HEART
-    target.style.color = 'red'
+    target.setAttribute('class', 'activated-heart')
   } else {
     target.innerText = EMPTY_HEART
-    target.removeAttribute('style')
+    target.removeAttribute('class')
   }
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
-  articles.map( article => {
-    let like = article.querySelector('li')
-    let heart = like.querySelector('span')
-    like.addEventListener('click', toggleHeart(like.querySelector('span')))
+  articles.map( (article, index) => {
+    article.addEventListener('click', event => {
+      console.log(index)  
+    })
   })
 })
 
