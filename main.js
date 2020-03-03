@@ -21,7 +21,7 @@ function collectArticles() {
   })
   return articles
 }
-// Your JavaScript code goes here!
+
 function toggleHeart(target) {
   if (target.innerText == EMPTY_HEART) {
     target.innerText = FULL_HEART
